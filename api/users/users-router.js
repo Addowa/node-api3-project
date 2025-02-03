@@ -2,6 +2,7 @@ const express = require('express');
 const {
   validateUserId,
   validateUser,
+  validatePost,
 } = require('../middleware/middleware')
 // You will need `users-model.js` and `posts-model.js` both
 // The middleware functions also need to be required
@@ -18,10 +19,11 @@ router.get('/:id', validateUserId, (req, res) => {
   console.log(req.user)
 });
 
-router.post('/', validateUser, (req, res) => {
+router.post('/', validateUser, validatePost, (req, res) => {
   // RETURN THE NEWLY CREATED USER OBJECT
   // this needs a middleware to check that the request body is valid
   console.log(req.name)
+  console.log(req.text)
 });
 
 router.put('/:id', validateUserId, validateUser, (req, res) => {
